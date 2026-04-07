@@ -8,13 +8,13 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Testing
+  - API Governance
+  - Breaking Changes
   - Contract Testing
+  - Diff
   - Linting
   - OpenAPI
-  - Breaking Changes
-  - API Governance
-  - Diff
+  - Testing
 url: >-
   https://raw.githubusercontent.com/api-evangelist/optic/refs/heads/main/apis.yml
 created: '2026-03-25'
@@ -30,11 +30,11 @@ apis:
       with forwards-only governance.
     humanURL: https://www.useoptic.com/docs
     tags:
+      - Breaking Changes
       - CLI
-      - OpenAPI
       - Diff
       - Linting
-      - Breaking Changes
+      - OpenAPI
     properties:
       - type: Documentation
         url: https://www.useoptic.com/docs
