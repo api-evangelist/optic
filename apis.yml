@@ -38,7 +38,7 @@ apis:
     properties:
       - type: Documentation
         url: https://www.useoptic.com/docs
-      - type: Getting Started
+      - type: GettingStarted
         url: https://www.useoptic.com/docs
       - type: OpenAPI Diff
         url: https://www.useoptic.com/docs/diff-openapi
@@ -46,7 +46,7 @@ apis:
         url: https://www.useoptic.com/docs/detect-breaking-changes
       - type: Linting
         url: https://www.useoptic.com/docs/lint-openapi
-      - type: Changelog
+      - type: ChangeLog
         url: https://www.useoptic.com/docs/openapi-changelog
       - type: API Verification
         url: https://www.useoptic.com/docs/verify-openapi
@@ -57,7 +57,7 @@ common:
     url: https://www.useoptic.com/docs
   - type: Core Concepts
     url: https://www.useoptic.com/docs/core-concepts
-  - type: GitHub Repository
+  - type: GitHubRepository
     url: https://github.com/opticdev/optic
 maintainers:
   - FN: Kin Lane
