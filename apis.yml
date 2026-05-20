@@ -51,6 +51,8 @@ apis:
       - type: API Verification
         url: https://www.useoptic.com/docs/verify-openapi
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/useoptic
   - type: Website
     url: https://www.useoptic.com
   - type: Documentation
