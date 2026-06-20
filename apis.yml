@@ -6,7 +6,7 @@ description: >-
   API design through behavior-aware specification comparison and forwards-only
   governance.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - API Governance
   - Breaking Changes
