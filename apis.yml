@@ -51,6 +51,10 @@ apis:
       - type: API Verification
         url: https://www.useoptic.com/docs/verify-openapi
 common:
+  - type: VulnerabilityDisclosure
+    url: security/optic-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/optic-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/useoptic
   - type: Website
