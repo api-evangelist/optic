@@ -63,6 +63,9 @@ apis:
       - type: API Verification
         url: https://www.useoptic.com/docs/verify-openapi
 common:
+  - type: License
+    name: MIT
+    url: https://github.com/opticdev/optic/blob/main/LICENSE
   - type: VulnerabilityDisclosure
     url: security/optic-vulnerability-disclosure.yml
   - type: DomainSecurity
