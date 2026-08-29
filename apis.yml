@@ -6,6 +6,18 @@ description: >-
   API design through behavior-aware specification comparison and forwards-only
   governance.
 type: Index
+deliveryModel:
+  model: self-hosted
+  license: MIT
+  open_source: true
+  commercial: false
+  callable_host: false
+  label: Self-hosted open source · you run it yourself
+  confidence: high
+  source:
+  - license
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
@@ -63,6 +75,10 @@ apis:
       - type: API Verification
         url: https://www.useoptic.com/docs/verify-openapi
 common:
+  - type: IssueTracker
+    url: https://github.com/opticdev/optic/issues
+  - type: Releases
+    url: https://github.com/opticdev/optic/releases
   - type: License
     name: MIT
     url: https://github.com/opticdev/optic/blob/main/LICENSE
