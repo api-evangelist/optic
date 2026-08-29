@@ -1,0 +1,204 @@
+generated: '2026-08-29'
+method: searched
+source: >-
+  https://github.com/opticdev/optic/wiki and the command registrations in
+  https://github.com/opticdev/optic/tree/main/projects/optic/src/commands
+provider: Optic
+providerId: optic
+name: Optic CLI
+description: >-
+  The Optic CLI is the whole product. It reads OpenAPI documents from a git
+  repository, diffs two versions of a spec with behaviour-aware comparison,
+  applies style-guide rulesets, and generates or verifies OpenAPI from captured
+  test traffic. It is MIT licensed and runs entirely locally; the optional
+  Optic Cloud upload targets are decommissioned (see lifecycle/).
+binary: optic
+config_file: optic.yml
+config_file_alt: optic.dev.yml
+user_config_path: ~/.config/optic/config.json
+install:
+  - method: npm
+    command: npm install -g @useoptic/optic
+  - method: docker
+    command: docker pull docker.io/useoptic/optic:latest
+  - method: github-action
+    command: 'uses: opticdev/action@v1'
+vendor_extensions:
+  - key: x-optic-url
+    description: Binds a local spec file to an API tracked in Optic Cloud.
+  - key: x-optic-standard
+    description: Names the ruleset/standard a spec is checked against.
+  - key: x-optic-path-ignore
+    description: Paths excluded from capture and verification.
+  - key: x-optic-ci-empty-spec
+    description: Marks a spec as intentionally empty for CI runs.
+commands:
+  - command: optic diff
+    group: compare
+    description: >-
+      Diff two OpenAPI specifications with behaviour-aware comparison and,
+      optionally, run rule checks against the change.
+    flags:
+      - '-S, --standard <standard>'
+      - '-H, --head-tag <head-tag>'
+      - '-c, --check'
+      - '-u, --upload'
+      - '-w, --web'
+      - '-o, --out <file>'
+      - '--json'
+      - '--last-change'
+  - command: optic diff-all
+    group: compare
+    description: Run a diff on all specs carrying an x-optic-url.
+    flags:
+      - '--compare-to <compare-to>'
+      - '--compare-from <compare-from>'
+      - '--match <match>'
+      - '--ignore <ignore>'
+      - '--standard <standard>'
+      - '--check'
+      - '--upload'
+      - '--web'
+      - '--json'
+  - command: optic lint
+    group: govern
+    description: Lint an OpenAPI document against the configured rulesets.
+    flags:
+      - '--web'
+  - command: optic run
+    group: ci
+    description: >-
+      CI workflow command that tests each OpenAPI specification in the repo and
+      summarizes the results as a pull (or merge) request comment.
+    flags:
+      - '-i, --ignore <glob_pattern,...>'
+      - '-I, --include-git-ignored'
+  - command: optic capture
+    group: generate
+    description: >-
+      Capture traffic using the configuration in optic.yml and generate or patch
+      OpenAPI operations from what was observed.
+    flags:
+      - '--postman <postman-collection-file>'
+      - '--har <har-file or directory>'
+      - '--verbose'
+      - '-s, --server-override <url>'
+      - '--upload'
+  - command: optic history
+    group: compare
+    description: Browse spec history and create a text changelog.
+    flags:
+      - '-D, --history-depth <history-depth>'
+  - command: optic bundle
+    group: spec-tools
+    description: Bundle a multi-file OpenAPI document into a single file.
+    flags:
+      - '-o [output]'
+  - command: optic dereference
+    group: spec-tools
+    description: Fully dereference an OpenAPI document, inlining every $ref.
+    flags:
+      - '-o [output]'
+  - command: optic config show
+    group: config
+    description: Display the rendered Optic configuration from optic.yml.
+  - command: optic login
+    group: cloud
+    description: Login to Optic (Optic Cloud). Decommissioned — see lifecycle/.
+    hidden: false
+  - command: optic api add
+    group: cloud
+    description: Add APIs to Optic. Decommissioned — see lifecycle/.
+    flags:
+      - '--history-depth <history-depth>'
+      - '--start-commit <start-commit>'
+      - '--all'
+      - '--web'
+  - command: optic api create
+    group: cloud
+    description: Generate an Optic URL to add to your specs.
+  - command: optic api list
+    group: spec-tools
+    description: List specs within a directory.
+  - command: optic spec push
+    group: cloud
+    description: Push a spec version. Decommissioned — see lifecycle/.
+    flags:
+      - '--tag <tag>'
+      - '--web'
+  - command: optic spec add-api-url
+    group: cloud
+    description: Add an Optic API URL to a spec file.
+  - command: optic ruleset init
+    group: govern
+    description: Initializes a new ruleset project.
+  - command: optic ruleset upload
+    group: cloud
+    description: Upload a custom ruleset to Optic Cloud. Decommissioned.
+    flags:
+      - '--organization-id <organization-id>'
+  - command: optic ci setup
+    group: ci
+    description: Generate a CI configuration for Optic.
+    flags:
+      - '--stdout'
+  - command: optic ci comment
+    group: ci
+    description: Comment on a pull request / merge request with the diff results.
+    flags:
+      - '--owner <owner>'
+      - '--repo <repo>'
+      - '--pull-request <pull-request>'
+      - '--project-id <project-id>'
+      - '--merge-request-id <merge-request-id>'
+      - '--enterprise-base-url <enterprise-base-url>'
+      - '--comment-url <comment-url>'
+      - '--verbose'
+hidden_subcommand_groups:
+  groups:
+    - beta
+    - ruleset
+    - api
+    - spec
+    - ci
+  note: >-
+    These groups are registered with { hidden: true } in
+    projects/optic/src/init.ts, so they do not appear in `optic --help` even
+    though they still resolve.
+removed_commands:
+  source: https://github.com/opticdev/optic/releases/tag/v1.0.0
+  released: '2024-08-07'
+  removed:
+    - optic oas (all subcommands)
+    - optic update
+    - optic new
+    - optic verify
+    - optic setup-tls
+  note: >-
+    v1.0.0 removed the deprecated capture commands in favour of `optic capture`,
+    and removed every connection to Optic Cloud servers (spec upload, hosted
+    rulesets, saved-data loading). The release notes also said `optic run` was
+    no longer supported in favour of `optic diff-all`; `run` was subsequently
+    reintroduced on main as the CI workflow command documented above.
+key_flows:
+  - name: Prevent breaking changes in CI
+    steps:
+      - Add a ruleset to optic.yml (breaking-changes)
+      - Run `optic diff --check` between the base and head spec
+      - Run `optic ci comment` to post the result on the pull request
+    docs: https://github.com/opticdev/optic/wiki/Prevent-Breaking-Changes
+  - name: Generate OpenAPI from test traffic
+    steps:
+      - Declare a capture block in optic.yml naming the server and requests
+      - Run `optic capture <spec> --update`
+      - Review the generated operations and commit the patched spec
+    docs: https://github.com/opticdev/optic/wiki/Using-Optic-Capture-with-Integration-Tests
+  - name: Lint against a style guide
+    steps:
+      - Configure standard or custom rulesets in optic.yml
+      - Run `optic lint <spec>`
+    docs: https://github.com/opticdev/optic/wiki/Diff-and-Lint-OpenAPI
+docs: https://github.com/opticdev/optic/wiki
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

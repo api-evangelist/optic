@@ -3,11 +3,13 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
 provider: Optic
 providerId: optic
+generated: '2026-08-29'
+method: probed
+source: >-
+  DNS probes of api.useoptic.com and www.useoptic.com (both NXDOMAIN) and the
+  command surface at https://github.com/opticdev/optic/wiki
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+modified: '2026-08-29'
 tags:
   - API Governance
   - Breaking Changes
@@ -16,79 +18,40 @@ tags:
   - Linting
   - OpenAPI
   - Testing
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Optic API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
-limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Optic CLI
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Optic CLI
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Optic CLI
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Optic CLI
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Optic CLI
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+description: >-
+  Optic publishes no rate limits, because Optic exposes no callable API. The
+  product is a local CLI that reads OpenAPI files from a git working tree; the
+  only remote calls it ever made went to Optic Cloud, which was disconnected at
+  v1.0.0 and whose hosts no longer resolve.
+limit_count: 0
+limits: []
+headers: {}
+responseCodes: {}
+note: >-
+  SUPERSEDES A SCAFFOLD. Until 2026-08-29 this file carried five invented
+  per-tier limits (10/100/1000 requests per minute, 1k/100k monthly quotas) and
+  a full X-RateLimit-* header set, written by the 2026-05-04 bulk sweep and
+  never observed on any Optic response. None of it was ever published by the
+  provider. It has been replaced with the honest zero.
+local_throughput_control:
+  parameter: capture[].config.request_concurrency
+  description: >-
+    The one throughput knob Optic does expose is client-side, not server-side —
+    it caps how many requests `optic capture` fires concurrently at the user's
+    OWN server under test. It is declared in optic.yml and validated by the
+    TypeBox schema in projects/optic/src/config.ts. It is not a rate limit
+    Optic imposes on anyone.
+evidence:
+  - url: https://api.useoptic.com/
+    status: '<no response>'
+    note: NXDOMAIN — the Optic Cloud REST base named in the open-source client
+  - url: https://www.useoptic.com/docs
+    status: '<no response>'
+    note: NXDOMAIN — the host that served the documentation no longer resolves
+  - url: https://github.com/opticdev/optic/wiki
+    status: 200
+    note: surviving documentation; documents no API, and therefore no limits
+checked: '2026-08-29'
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

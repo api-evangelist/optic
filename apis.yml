@@ -1,10 +1,17 @@
 aid: optic
 name: Optic
 description: >-
-  Optic is an open source tool for OpenAPI linting, diffing, and testing that
-  helps prevent breaking changes, publish accurate documentation, and improve
-  API design through behavior-aware specification comparison and forwards-only
-  governance.
+  Optic is an MIT-licensed command-line tool for OpenAPI linting, diffing and
+  testing. It compares two versions of an OpenAPI document with behaviour-aware
+  diffing to catch breaking changes before they ship, enforces style-guide
+  rulesets (breaking-changes, documentation, examples, naming-changes, Spectral
+  and lintgpt), and generates or verifies OpenAPI from captured test traffic via
+  HAR files, Postman collections or a local proxy. Optic Labs was acquired by
+  Atlassian in April 2024; the hosted Optic Cloud service was disconnected from
+  the CLI at v1.0.0 in August 2024, the documentation site was retired in favour
+  of the GitHub Wiki, and the source repository was archived read-only in
+  January 2026 after a final v1.0.9 release. Optic publishes no callable API of
+  its own — it is a tool that consumes and governs other people's contracts.
 type: Index
 deliveryModel:
   model: self-hosted
@@ -39,20 +46,25 @@ tags:
   - Linting
   - OpenAPI
   - Testing
+  - CLI
+  - Open Source
+  - Archived
 url: >-
   https://raw.githubusercontent.com/api-evangelist/optic/refs/heads/main/apis.yml
 created: '2026-03-25'
-modified: '2026-03-26'
+modified: '2026-08-29'
 specificationVersion: '0.23'
 apis:
   - aid: optic:optic-cli
     name: Optic CLI
     description: >-
-      The Optic CLI provides OpenAPI diffing, linting, and breaking change
+      The Optic CLI provides OpenAPI diffing, linting and breaking-change
       detection from the command line, comparing two versions of an OpenAPI
-      specification using behavior-aware diffing and applying style guide rules
-      with forwards-only governance.
-    humanURL: https://www.useoptic.com/docs
+      specification with behaviour-aware diffing and applying style-guide rules
+      with forwards-only governance. It runs entirely locally against files in a
+      git working tree and requires no credential; the optional Optic Cloud
+      upload targets were removed at v1.0.0 and their hosts no longer resolve.
+    humanURL: https://github.com/opticdev/optic/wiki
     tags:
       - Breaking Changes
       - CLI
@@ -61,41 +73,96 @@ apis:
       - OpenAPI
     properties:
       - type: Documentation
-        url: https://www.useoptic.com/docs
+        url: https://github.com/opticdev/optic/wiki
       - type: GettingStarted
-        url: https://www.useoptic.com/docs
+        url: https://github.com/opticdev/optic/wiki
+      - type: CLI
+        url: cli/optic-cli.yml
       - type: OpenAPI Diff
-        url: https://www.useoptic.com/docs/diff-openapi
+        url: https://github.com/opticdev/optic/wiki/Diff-and-Lint-OpenAPI
       - type: Breaking Changes
-        url: https://www.useoptic.com/docs/detect-breaking-changes
+        url: https://github.com/opticdev/optic/wiki/Prevent-Breaking-Changes
       - type: Linting
-        url: https://www.useoptic.com/docs/lint-openapi
-      - type: ChangeLog
-        url: https://www.useoptic.com/docs/openapi-changelog
-      - type: API Verification
-        url: https://www.useoptic.com/docs/verify-openapi
+        url: https://github.com/opticdev/optic/wiki/Running-Spectral-Rules
+      - type: Custom Rulesets
+        url: https://github.com/opticdev/optic/wiki/Building-Custom-Rulesets
+      - type: Traffic Capture
+        url: https://github.com/opticdev/optic/wiki/Using-Optic-Capture-with-Integration-Tests
 common:
+  - type: Website
+    url: https://github.com/opticdev/optic
+  - type: Documentation
+    url: https://github.com/opticdev/optic/wiki
+  - type: GettingStarted
+    url: https://github.com/opticdev/optic/wiki
+  - type: GitHubRepository
+    url: https://github.com/opticdev/optic
+  - type: GitHubOrganization
+    url: https://github.com/opticdev
   - type: IssueTracker
     url: https://github.com/opticdev/optic/issues
+  - type: Support
+    url: https://github.com/opticdev/optic/discussions
   - type: Releases
     url: https://github.com/opticdev/optic/releases
   - type: License
     name: MIT
     url: https://github.com/opticdev/optic/blob/main/LICENSE
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/useoptic
+  - type: ChangeLog
+    url: changelog/optic-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/optic-lifecycle.yml
+  - type: CLI
+    url: cli/optic-cli.yml
+  - type: Packages
+    url: packages/optic-packages.yml
+  - type: SDKs
+    url: packages/optic-packages.yml
+  - type: Conventions
+    url: conventions/optic-conventions.yml
+  - type: Conformance
+    url: conformance/optic-conformance.yml
+  - type: WellKnown
+    url: well-known/optic-well-known.yml
+  - type: SecurityTxt
+    url: well-known/optic-security.txt
+  - type: Security
+    url: security/optic-vulnerability-disclosure.yml
   - type: VulnerabilityDisclosure
     url: security/optic-vulnerability-disclosure.yml
   - type: DomainSecurity
     url: security/optic-domain-security.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/useoptic
-  - type: Website
-    url: https://www.useoptic.com
-  - type: Documentation
-    url: https://www.useoptic.com/docs
-  - type: Core Concepts
-    url: https://www.useoptic.com/docs/core-concepts
-  - type: GitHubRepository
-    url: https://github.com/opticdev/optic
+  - type: LLMsTxt
+    url: llms/optic-llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-29'
+  status: enriched
+  artifacts_added: 9
+  pass: local-v1
+x-coverage:
+  state: none
+  reason: defunct
+  detail: >-
+    Optic never shipped a callable API and the company no longer exists as an
+    independent surface — Optic Labs was absorbed by Atlassian in April 2024,
+    the Optic Cloud REST backend named in its own open-source client
+    (api.useoptic.com) and the docs host (www.useoptic.com) both return
+    NXDOMAIN, useoptic.com 301s to the GitHub repository, and that repository
+    was archived read-only in January 2026 with no sunset notice.
+  evidence:
+    - url: https://useoptic.com/
+      status: 301
+    - url: https://www.useoptic.com/docs
+      status: 0
+    - url: https://api.useoptic.com/openapi.json
+      status: 0
+    - url: https://github.com/opticdev/optic
+      status: 200
+    - url: https://github.com/opticdev/optic/wiki
+      status: 200
+  checked: '2026-08-29'

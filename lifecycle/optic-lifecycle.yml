@@ -1,0 +1,130 @@
+generated: '2026-08-29'
+method: searched
+source: >-
+  GitHub API for opticdev/optic (archived flag, pushed_at), the v1.0.0 release
+  notes, https://github.com/opticdev/optic/README.md, live DNS probes of
+  useoptic.com / www.useoptic.com / api.useoptic.com / app.useoptic.com, and
+  https://www.atlassian.com/blog/announcements/optic-acquisition
+provider: Optic
+providerId: optic
+description: >-
+  Lifecycle record for Optic. Optic Labs was acquired by Atlassian in April 2024.
+  The hosted product (Optic Cloud) was disconnected from the CLI at v1.0.0 in
+  August 2024 and its hosts no longer resolve; the open-source CLI continued
+  under MIT until the repository was archived on GitHub. Optic today is a frozen
+  open-source tool with no service, no API and no maintained documentation site.
+status: archived
+supported: false
+versioning:
+  scheme: semver
+  current: 1.0.9
+  released: '2025-08-10'
+  source: https://github.com/opticdev/optic/releases
+milestones:
+  - date: '2018-03-02'
+    event: opticdev/optic repository created on GitHub
+    source: https://api.github.com/repos/opticdev/optic
+  - date: '2024-04'
+    event: >-
+      Optic Labs acquired by Atlassian; announced as joining the Compass
+      developer-experience platform
+    source: https://www.atlassian.com/blog/announcements/optic-acquisition
+  - date: '2024-08-07'
+    event: >-
+      v1.0.0 removed every connection to Optic Cloud servers (spec upload,
+      hosted rulesets, saved-data loading) and removed the deprecated capture
+      commands
+    source: https://github.com/opticdev/optic/releases/tag/v1.0.0
+  - date: '2024-08-07'
+    event: >-
+      Last Docker image build pushed to docker.io/useoptic/optic (tags latest,
+      v1.0, v1.0.0)
+    source: https://hub.docker.com/v2/repositories/useoptic/optic/
+  - date: '2025-05-14'
+    event: >-
+      v1.0.7 repointed the in-product capture-config documentation links at the
+      GitHub Wiki — the first visible sign the docs site was going away
+    source: https://github.com/opticdev/optic/releases/tag/v1.0.7
+  - date: '2025-08-10'
+    event: Final release v1.0.9 and final npm publish of every @useoptic package
+    source: https://github.com/opticdev/optic/releases/tag/v1.0.9
+  - date: '2026-01-08'
+    event: Final push to the opticdev/optic default branch
+    source: https://api.github.com/repos/opticdev/optic
+  - date: '2026-01'
+    event: >-
+      opticdev/optic marked ARCHIVED (read-only) on GitHub. No sunset notice,
+      migration guide or successor was published by the maintainers.
+    source: https://api.github.com/repos/opticdev/optic
+decommissioned_endpoints:
+  - host: www.useoptic.com
+    role: Marketing site and documentation (docs, blog, pricing)
+    probe: DNS A lookup
+    status: NXDOMAIN — host does not resolve
+    checked: '2026-08-29'
+  - host: api.useoptic.com
+    role: >-
+      Optic Cloud REST backend. Named as the production base URL in the
+      open-source client at projects/optic/src/client/optic-backend.ts, called
+      with an `Authorization: Token <token>` header.
+    probe: DNS A lookup
+    status: NXDOMAIN — host does not resolve
+    checked: '2026-08-29'
+  - host: app.useoptic.com
+    role: Optic Cloud web application (changelog web view, spec browser)
+    probe: DNS A lookup
+    status: NXDOMAIN — host does not resolve
+    checked: '2026-08-29'
+surviving_surfaces:
+  - name: Source repository (archived, read-only)
+    url: https://github.com/opticdev/optic
+    status: 200
+  - name: Documentation (moved to the GitHub Wiki)
+    url: https://github.com/opticdev/optic/wiki
+    status: 200
+  - name: Release history
+    url: https://github.com/opticdev/optic/releases
+    status: 200
+  - name: npm distribution
+    url: https://registry.npmjs.org/@useoptic%2Foptic
+    status: 200
+  - name: Container distribution
+    url: https://hub.docker.com/r/useoptic/optic
+    status: 200
+  - name: apex domain, now a redirect to the repository
+    url: https://useoptic.com/
+    status: 301 -> https://github.com/opticdev/optic
+deprecation_policy:
+  published: false
+  note: >-
+    No deprecation or sunset policy was ever published. Removals were announced
+    only in release notes; the archival itself carried no announcement at all.
+  removals_announced_in_release_notes:
+    - release: v1.0.0
+      date: '2024-08-07'
+      removed:
+        - optic oas (all subcommands)
+        - optic update
+        - optic new
+        - optic verify
+        - optic setup-tls
+        - Optic Cloud upload / hosted-ruleset connections
+      url: https://github.com/opticdev/optic/releases/tag/v1.0.0
+sla:
+  published: false
+  note: >-
+    MIT licensed, provided as-is. No SLA was published, and none applies to an
+    archived repository.
+status_page:
+  published: false
+  note: >-
+    No status page. The hosted service it would have covered is decommissioned.
+support:
+  channel: GitHub Issues and Discussions on the archived repository
+  url: https://github.com/opticdev/optic/issues
+  note: >-
+    The repository is archived, so issues and discussions are read-only. 29
+    issues were open at the time of archival.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

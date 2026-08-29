@@ -1,0 +1,88 @@
+# Optic
+
+> Optic is an MIT-licensed command-line tool for OpenAPI linting, diffing and
+> testing. It compares two versions of an OpenAPI document with behaviour-aware
+> diffing, enforces style-guide rulesets, and generates or verifies OpenAPI from
+> captured test traffic. Optic Labs was acquired by Atlassian in April 2024; the
+> hosted service was shut off in August 2024 and the source repository was
+> archived in January 2026.
+
+IMPORTANT STATUS FOR AGENTS AND INTEGRATORS
+- Optic has NO callable API. There is no REST, GraphQL, MCP or A2A surface.
+- www.useoptic.com, api.useoptic.com and app.useoptic.com do not resolve (NXDOMAIN).
+- useoptic.com 301-redirects to https://github.com/opticdev/optic.
+- Documentation moved from the retired docs site to the GitHub Wiki.
+- github.com/opticdev/optic is ARCHIVED and read-only. Last release v1.0.9,
+  2025-08-10. Last commit 2026-01-08. No sunset notice or migration guide was
+  published by the maintainers.
+- A spec still carrying an `x-optic-url` extension references a decommissioned
+  host and will not resolve.
+
+## Install
+- npm: `npm install -g @useoptic/optic` (https://www.npmjs.com/package/@useoptic/optic)
+- Docker: `docker pull docker.io/useoptic/optic:latest` (https://hub.docker.com/r/useoptic/optic) — last built 2024-08-07, nine patch releases behind npm
+- GitHub Action: `uses: opticdev/action@v1` (https://github.com/marketplace/actions/optic-ci)
+
+## Documentation
+- Wiki home: https://github.com/opticdev/optic/wiki
+- Diff and lint OpenAPI: https://github.com/opticdev/optic/wiki/Diff-and-Lint-OpenAPI
+- Prevent breaking changes: https://github.com/opticdev/optic/wiki/Prevent-Breaking-Changes
+- Built-in rulesets: https://github.com/opticdev/optic/wiki/Built%E2%80%90in-Rulesets
+- Building custom rulesets: https://github.com/opticdev/optic/wiki/Building-Custom-Rulesets
+- Running Spectral rules: https://github.com/opticdev/optic/wiki/Running-Spectral-Rules
+- Require descriptions: https://github.com/opticdev/optic/wiki/Require-Descriptions
+- Consistent naming: https://github.com/opticdev/optic/wiki/Consistent-Naming
+- Examples are accurate: https://github.com/opticdev/optic/wiki/Examples-are-accurate
+- Capture from integration tests: https://github.com/opticdev/optic/wiki/Using-Optic-Capture-with-Integration-Tests
+- Capture from HAR: https://github.com/opticdev/optic/wiki/Using-Optic-Capture-with-HAR
+- Capture from Postman: https://github.com/opticdev/optic/wiki/Using-Optic-Capture-with-Postman
+- Generate OpenAPI (in-repo doc): https://github.com/opticdev/optic/blob/main/docs/generate-openapi.md
+
+## Commands
+- `optic diff <base> <head>` — behaviour-aware diff of two specs; `--check` enables rules, `--json` machine output
+- `optic diff-all` — diff every spec carrying `x-optic-url`
+- `optic lint <spec>` — run configured rulesets against a spec
+- `optic run` — CI workflow command; tests every spec in the repo, summarises as one PR comment
+- `optic capture <spec>` — capture traffic per optic.yml; `--har`, `--postman`, `--server-override`
+- `optic bundle <spec> -o <out>` — bundle a multi-file spec
+- `optic dereference <spec> -o <out>` — inline every $ref
+- `optic history` — browse spec history and build a text changelog
+- `optic config show` — print the rendered optic.yml
+- `optic ci setup` / `optic ci comment` — generate CI config; post results on a GitHub PR or GitLab MR
+- `optic ruleset init` — scaffold a custom ruleset project
+- `optic api list` — list specs in a directory
+Decommissioned (Optic Cloud): `optic login`, `optic api add`, `optic api create`,
+`optic spec push`, `optic spec add-api-url`, `optic ruleset upload`.
+
+## Configuration
+- File: `optic.yml` (dev override `optic.dev.yml`), Handlebars-templated then Ajv-validated
+- Keys: `extends`, `ruleset`, `capture`, `external_refs.resolve_headers`
+- Reserved OpenAPI extensions: `x-optic-url`, `x-optic-standard`, `x-optic-path-ignore`, `x-optic-ci-empty-spec`
+
+## Built-in rulesets
+breaking-changes, documentation, examples, naming-changes, spectral, lintgpt
+
+## Packages
+All at 1.0.9, published 2025-08-10, MIT:
+- @useoptic/optic (the CLI)
+- @useoptic/openapi-io
+- @useoptic/openapi-utilities
+- @useoptic/json-pointer-helpers
+- @useoptic/rulesets-base
+- @useoptic/standard-rulesets
+
+## Project links
+- Repository (archived): https://github.com/opticdev/optic
+- Releases: https://github.com/opticdev/optic/releases
+- Issues (read-only): https://github.com/opticdev/optic/issues
+- Discussions (read-only): https://github.com/opticdev/optic/discussions
+- GitHub organization: https://github.com/opticdev
+- License (MIT): https://github.com/opticdev/optic/blob/main/LICENSE
+- Acquisition announcement: https://www.atlassian.com/blog/announcements/optic-acquisition
+- Security disclosure (Atlassian, canonical for the domain): https://useoptic.com/.well-known/security.txt
+
+## Optional
+- Provenance: generated 2026-08-29 by the API Evangelist enrichment pipeline from
+  live probes of the hosts above, the npm and Docker Hub registry APIs, the
+  GitHub API, and the opticdev/optic source tree. Optic publishes no llms.txt of
+  its own — the host that would serve one does not resolve.

@@ -1,0 +1,68 @@
+generated: '2026-08-29'
+method: probed
+source: live HTTP probes of every host named in apis.yml
+provider: Optic
+providerId: optic
+description: >-
+  /.well-known/ probe of the Optic hosts. Only useoptic.com still resolves; it
+  is served from Atlassian infrastructure (104.192.142.0/24) following the 2024
+  acquisition and 301s every path except /.well-known/security.txt to
+  github.com/opticdev/optic. www.useoptic.com, api.useoptic.com and
+  app.useoptic.com are NXDOMAIN.
+hosts:
+  - host: useoptic.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: optic-security.txt
+        content_type: text/plain
+        note: >-
+          A real, PGP-signed RFC 9116 document. Canonical is
+          https://www.atlassian.com/.well-known/security.txt — Atlassian serves
+          its own corporate security.txt across the domain it acquired, so the
+          contact and policy are Atlassian's, not a separate Optic program.
+      - path: /.well-known/openid-configuration
+        status: 301
+        note: redirects to https://github.com/opticdev/optic — no document
+      - path: /.well-known/oauth-authorization-server
+        status: 301
+        note: redirects to https://github.com/opticdev/optic — no document
+      - path: /.well-known/api-catalog
+        status: 301
+        note: redirects to https://github.com/opticdev/optic — no document
+      - path: /.well-known/ai-plugin.json
+        status: 301
+        note: redirects to https://github.com/opticdev/optic — no document
+      - path: /.well-known/agent-card.json
+        status: 301
+        note: redirects to https://github.com/opticdev/optic — no document
+      - path: /.well-known/agent.json
+        status: 301
+        note: redirects to https://github.com/opticdev/optic — no document
+      - path: /llms.txt
+        status: 301
+        note: redirects to https://github.com/opticdev/optic — no document
+      - path: /openapi.json
+        status: 301
+        note: redirects to https://github.com/opticdev/optic — no document
+      - path: /swagger.json
+        status: 301
+        note: redirects to https://github.com/opticdev/optic — no document
+  - host: www.useoptic.com
+    unresolvable: true
+    documents: []
+    note: DNS A lookup returns NXDOMAIN; no paths could be probed.
+  - host: api.useoptic.com
+    unresolvable: true
+    documents: []
+    note: >-
+      The Optic Cloud REST base named in the open-source client. DNS A lookup
+      returns NXDOMAIN; no paths could be probed.
+  - host: app.useoptic.com
+    unresolvable: true
+    documents: []
+    note: DNS A lookup returns NXDOMAIN; no paths could be probed.
+checked: '2026-08-29'
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

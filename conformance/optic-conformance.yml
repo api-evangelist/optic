@@ -1,0 +1,124 @@
+generated: '2026-08-29'
+method: derived
+source: >-
+  https://github.com/opticdev/optic/wiki and the source tree at
+  https://github.com/opticdev/optic (projects/openapi-utilities/src/index.ts,
+  projects/standard-rulesets/src/, projects/optic/src/constants.ts,
+  projects/optic/src/commands/capture/capture.ts)
+provider: Optic
+providerId: optic
+description: >-
+  Standards conformance for Optic. Optic exposes no API of its own, so there is
+  no runtime contract to assert against. What is real and evidenced here is the
+  set of specifications the TOOL reads, writes and enforces — which is the
+  meaningful conformance surface for an API-governance product.
+api_conformance:
+  applicable: false
+  note: >-
+    Optic publishes no callable API. The Optic Cloud REST backend
+    (api.useoptic.com) was disconnected from the CLI at v1.0.0 in August 2024
+    and the host no longer resolves, so there is nothing to test for oauth2,
+    oidc, rfc9457, pagination, idempotency or any other runtime convention.
+    See lifecycle/optic-lifecycle.yml.
+conformance:
+  - id: openapi-3.0
+    name: OpenAPI Specification 3.0.x
+    conforms: true
+    role: consumes-and-emits
+    evidence: >-
+      projects/openapi-utilities/src/index.ts imports OpenAPIV3 from
+      openapi-types and the traverser walks 3.0 documents; the CLI diffs, lints,
+      bundles and dereferences 3.0 specs.
+  - id: openapi-3.1
+    name: OpenAPI Specification 3.1
+    conforms: true
+    role: consumes-and-emits
+    evidence: >-
+      projects/openapi-utilities/src/index.ts imports OpenAPIV3_1 and exports
+      FlatOpenAPIV3_1; polymorphic 3.1 schema fixtures ship under
+      projects/openapi-utilities/inputs/openapi3/polymorphic-schemas-3_1.json.
+  - id: swagger-2.0
+    name: OpenAPI / Swagger 2.0
+    conforms: partial
+    role: consumes
+    evidence: >-
+      OpenAPIV2 is imported in projects/openapi-utilities/src/index.ts. Read
+      support only; Optic's rulesets and capture path target OpenAPI 3.x.
+  - id: json-schema
+    name: JSON Schema
+    conforms: true
+    role: consumes-and-emits
+    evidence: >-
+      Optic infers and patches request/response schemas from observed traffic
+      during `optic capture`, and its shape-generation tests live at
+      projects/optic/src/commands/oas/tests/shapes/.
+  - id: rfc6901
+    name: 'RFC 6901: JavaScript Object Notation (JSON) Pointer'
+    conforms: true
+    role: implements
+    evidence: >-
+      Published as the first-party library @useoptic/json-pointer-helpers and
+      used to address every node Optic reports a change or violation against.
+  - id: spectral
+    name: Spectral rulesets
+    conforms: true
+    role: executes
+    evidence: >-
+      projects/standard-rulesets/src/spectral ships a Spectral bridge; the wiki
+      documents it at
+      https://github.com/opticdev/optic/wiki/Running-Spectral-Rules
+  - id: har-1.2
+    name: 'HAR 1.2 / 1.3 (HTTP Archive)'
+    conforms: true
+    role: consumes
+    evidence: >-
+      `optic capture --har <har-file or directory>` accepts HAR v1.2 and v1.3;
+      documented at
+      https://github.com/opticdev/optic/wiki/Using-Optic-Capture-with-HAR
+  - id: postman-collection
+    name: Postman Collection
+    conforms: true
+    role: consumes
+    evidence: >-
+      `optic capture --postman <postman-collection-file>`; documented at
+      https://github.com/opticdev/optic/wiki/Using-Optic-Capture-with-Postman
+  - id: semver
+    name: Semantic Versioning
+    conforms: true
+    role: follows
+    evidence: >-
+      Release tags v0.55.x -> v1.0.0 -> v1.0.9 on
+      https://github.com/opticdev/optic/releases
+  - id: rfc9116
+    name: 'RFC 9116: A File Format to Aid in Security Vulnerability Disclosure'
+    conforms: true
+    role: publishes
+    evidence: >-
+      https://useoptic.com/.well-known/security.txt returns 200 with a
+      PGP-signed document (Atlassian canonical, served across the acquired
+      domain). See well-known/optic-well-known.yml.
+domain_standard:
+  market: API governance and contract testing
+  standard: OpenAPI Specification
+  declared: true
+  evidence: >-
+    Optic declares its alignment with OpenAPI inside the contracts it operates
+    on, via four reserved vendor extensions registered in
+    projects/optic/src/constants.ts — x-optic-url, x-optic-standard,
+    x-optic-path-ignore and x-optic-ci-empty-spec — and its built-in ruleset
+    families (breaking-changes, documentation, examples, naming-changes,
+    spectral, lintgpt) are expressed against the OpenAPI object model rather
+    than a bespoke one.
+  note: >-
+    Recorded as a domain-standard signature read from the artifact surface, not
+    from a marketing claim. Optic is a consumer and enforcer of the standard
+    rather than a service that publishes a conformant contract of its own.
+compliance:
+  certifications: []
+  note: >-
+    No SOC 2, ISO 27001, PCI, HIPAA or FedRAMP attestation is published for
+    Optic. There is no trust center. The only security surface on the domain is
+    the acquirer's corporate security.txt, so no Compliance pointer is emitted.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

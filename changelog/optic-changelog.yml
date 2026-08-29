@@ -1,0 +1,95 @@
+generated: '2026-08-29'
+method: searched
+source: https://github.com/opticdev/optic/releases
+provider: Optic
+providerId: optic
+description: >-
+  Optic publishes its change history as GitHub Releases on opticdev/optic. There
+  is no separate hosted changelog: the former docs site (www.useoptic.com) no
+  longer resolves, so Releases is the only surviving dated record.
+scheme: semver
+current_version: 1.0.9
+current_version_released: '2025-08-10'
+release_feed: https://github.com/opticdev/optic/releases.atom
+cadence: >-
+  Irregular and now stopped. Nine releases across 2024-08 to 2025-08, then
+  nothing; the repository was archived and last pushed 2026-01-08.
+entries:
+  - version: v1.0.9
+    date: '2025-08-10'
+    breaking: false
+    highlights:
+      - >-
+        exclude_operations_with_extension now supports matching on specific
+        extension values (PR 2887)
+    url: https://github.com/opticdev/optic/releases/tag/v1.0.9
+  - version: v1.0.8
+    date: '2025-05-14'
+    breaking: false
+    highlights:
+      - Patch release, no published notes
+    url: https://github.com/opticdev/optic/releases/tag/v1.0.8
+  - version: v1.0.7
+    date: '2025-05-14'
+    breaking: false
+    highlights:
+      - >-
+        Capture config docs repointed at the GitHub Wiki after the docs site was
+        retired (PR 2884)
+    url: https://github.com/opticdev/optic/releases/tag/v1.0.7
+  - version: v1.0.6
+    date: '2025-02-05'
+    breaking: false
+    highlights:
+      - Static-file output for diff
+      - Allow overriding the CI comment
+      - Dependency updates
+    url: https://github.com/opticdev/optic/releases/tag/v1.0.6
+  - version: v1.0.5
+    date: '2025-01-07'
+    breaking: false
+    highlights:
+      - Static-file output for diff (PR 2863)
+    url: https://github.com/opticdev/optic/releases/tag/v1.0.5
+  - version: v1.0.4
+    date: '2024-10-11'
+    breaking: false
+    highlights:
+      - Patch release, no published notes
+    url: https://github.com/opticdev/optic/releases/tag/v1.0.4
+  - version: v1.0.3
+    date: '2024-08-29'
+    breaking: false
+    highlights:
+      - Patch release, no published notes
+    url: https://github.com/opticdev/optic/releases/tag/v1.0.3
+  - version: v1.0.2
+    date: '2024-08-27'
+    breaking: false
+    highlights:
+      - Patch release, no published notes
+    url: https://github.com/opticdev/optic/releases/tag/v1.0.2
+  - version: v1.0.1
+    date: '2024-08-27'
+    breaking: false
+    highlights:
+      - Patch release, no published notes
+    url: https://github.com/opticdev/optic/releases/tag/v1.0.1
+  - version: v1.0.0
+    date: '2024-08-07'
+    breaking: true
+    highlights:
+      - >-
+        Removed the deprecated capture commands — the oas subcommands, optic
+        update, optic new, optic verify and optic setup-tls — in favour of
+        optic capture
+      - >-
+        Removed all connections to Optic Cloud servers: spec upload, hosted
+        rulesets/rules, and saved-data loading
+      - >-
+        optic run declared unsupported in favour of optic diff-all (run was
+        later reintroduced as the CI workflow command)
+    url: https://github.com/opticdev/optic/releases/tag/v1.0.0
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

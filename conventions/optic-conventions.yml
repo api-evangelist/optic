@@ -1,0 +1,152 @@
+generated: '2026-08-29'
+method: derived
+source: >-
+  https://github.com/opticdev/optic/wiki plus the source tree at
+  https://github.com/opticdev/optic (projects/optic/src/config.ts,
+  projects/optic/src/constants.ts, projects/optic/src/client/optic-backend.ts)
+provider: Optic
+providerId: optic
+description: >-
+  Cross-cutting conventions for Optic. Optic is a local command-line tool, not a
+  hosted API, so the conventions that matter to an integrator are its
+  configuration contract, its reserved OpenAPI vendor extensions, and its exit
+  and output semantics — not HTTP-level pagination or rate-limit signalling.
+  The historical Optic Cloud HTTP conventions are recorded for completeness and
+  marked decommissioned.
+surface: cli
+auth:
+  style: none-for-local-use
+  note: >-
+    Every core command (diff, diff-all, lint, capture, bundle, dereference,
+    history, run, ci) runs entirely locally against files in a git working tree
+    and requires no credential.
+  cloud_legacy:
+    status: decommissioned
+    scheme: 'Authorization: Token <token>'
+    base_url: https://api.useoptic.com
+    obtained_via: optic login
+    token_store: ~/.config/optic/config.json
+    evidence: >-
+      projects/optic/src/client/optic-backend.ts sets the Authorization header
+      and names the production base URL; projects/optic/src/config.ts defines
+      USER_CONFIG_PATH.
+    note: >-
+      v1.0.0 (2024-08-07) removed all connections to Optic Cloud servers and the
+      host no longer resolves. Do not build against this.
+configuration:
+  file: optic.yml
+  dev_file: optic.dev.yml
+  user_config: ~/.config/optic/config.json
+  validated_with: Ajv against a TypeBox-declared schema in projects/optic/src/config.ts
+  templating: Handlebars — optic.yml values are rendered before validation
+  env_file: .env is loaded via dotenv
+  keys:
+    - key: extends
+      description: Inherit a shared base configuration from another location.
+    - key: ruleset
+      description: >-
+        Array of ruleset names or single-key objects configuring a ruleset —
+        breaking-changes, documentation, examples, naming-changes, spectral,
+        lintgpt, or a custom ruleset.
+    - key: capture
+      description: >-
+        Map of spec path to capture config — server (dir, command, url,
+        ready_endpoint, ready_interval, ready_timeout), requests (run or send),
+        and config.request_concurrency.
+    - key: external_refs.resolve_headers
+      description: >-
+        Headers (optionally scoped by url_prefix) used when resolving external
+        $refs over HTTP.
+vendor_extensions:
+  namespace: x-optic-*
+  keys:
+    - key: x-optic-url
+      description: Binds a spec file to an API tracked in Optic Cloud (legacy).
+    - key: x-optic-standard
+      description: Names the ruleset/standard a spec is checked against.
+    - key: x-optic-path-ignore
+      description: Paths excluded from capture and verification.
+    - key: x-optic-ci-empty-spec
+      description: Marks a spec as intentionally empty so CI does not fail on it.
+  note: >-
+    These are written INTO the customer's OpenAPI document, so they are the one
+    part of Optic's contract that outlives the tool. A spec still carrying
+    x-optic-url now references a decommissioned host.
+output:
+  formats:
+    - human-readable terminal output (default)
+    - '--json on diff and diff-all'
+    - '--out <file> writes a self-contained HTML diff (with --web)'
+  ci_integration: >-
+    `optic ci comment` posts results to a GitHub pull request or GitLab merge
+    request; `optic run` summarises every spec in the repo as a single PR
+    comment. Enterprise GitHub/GitLab are supported via --enterprise-base-url.
+  failure_semantics: >-
+    Rule violations and breaking changes fail the command (non-zero exit) only
+    when checks are enabled — `--check` on diff and diff-all. Without --check,
+    diff reports and exits successfully.
+versioning:
+  scheme: semver
+  applies_to: the CLI and every @useoptic npm package (all released in lockstep)
+  breaking_change_policy: >-
+    Not published as a policy. The one major bump, v1.0.0, announced its
+    removals in the release notes only.
+telemetry:
+  present: true
+  vendors:
+    - Segment (initSegment, SEGMENT_KEY) — per-command usage events
+    - Sentry (initSentry, SENTRY_URL) — error reporting
+  note: >-
+    projects/optic/src/init.ts fires optic.<command> and optic.cli events on
+    every invocation, recording the command name, args, install method and
+    whether CI=true. Tokens are anonymized before transmission
+    (anonymizeUserToken / anonymizeOrgToken). Recorded here because it is a real
+    runtime behaviour an adopter should know about, not as a criticism.
+pagination:
+  applicable: false
+  note: No HTTP API surface.
+rate_limit_signaling:
+  applicable: false
+  note: No HTTP API surface. See rate-limits/optic-rate-limits.yml.
+error_envelope:
+  applicable: false
+  note: >-
+    Errors are terminal output, not a wire format. There is no problem+json or
+    coded error registry to catalogue, so no errors/ artifact is emitted.
+idempotency:
+  supported: na
+  note: >-
+    Optic performs no remote writes. Local commands are naturally repeatable —
+    diff, lint, bundle and dereference are pure reads, and `optic capture`
+    rewrites the same spec file deterministically from the same traffic — so
+    there is no idempotency key surface to document. No Idempotency pointer is
+    emitted.
+dry_run_mode:
+  supported: partial
+  note: >-
+    `optic capture <spec>` reports what it would add or change without writing;
+    the write only happens when the update path is invoked. `optic diff` and
+    `optic lint` are read-only by construction.
+reversibility:
+  grade: na
+  applicable: false
+  note: >-
+    Optic has no remote write surface, so there is nothing to cancel, refund,
+    void or restore. The only mutation it performs is rewriting an OpenAPI file
+    inside the user's own git working tree, and reversal is git's job — `git
+    checkout` or `git revert` on the affected spec. No provider-stated reversal
+    window exists, and none is invented here.
+  local_mutations:
+    - operation: optic capture (spec update)
+      writes: The OpenAPI document under version control
+      reversal: git checkout / git revert on the modified file
+      window: unbounded — governed by the user's own VCS, not by Optic
+  cross_reference: lifecycle/optic-lifecycle.yml
+related:
+  - cli/optic-cli.yml
+  - lifecycle/optic-lifecycle.yml
+  - conformance/optic-conformance.yml
+  - packages/optic-packages.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

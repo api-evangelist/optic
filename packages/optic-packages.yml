@@ -1,0 +1,157 @@
+generated: '2026-08-29'
+method: searched
+source: >-
+  registry.npmjs.org metadata endpoints, hub.docker.com/v2 API, and the
+  GitHub API for opticdev/optic + opticdev/action
+provider: Optic
+providerId: optic
+description: >-
+  First-party client libraries and distributions published by Optic (Optic Labs,
+  acquired by Atlassian in April 2024). Optic is a developer TOOL, not an API
+  service: these packages are the tool itself and the libraries it is built
+  from, not SDKs for a hosted Optic API. The Optic Cloud backend the CLI could
+  optionally talk to (https://api.useoptic.com) no longer resolves.
+note: >-
+  CURRENCY / DECAY SIGNAL. Every npm package below is pinned at 1.0.9, published
+  2025-08-10. The source repository (github.com/opticdev/optic) was ARCHIVED on
+  GitHub and last pushed 2026-01-08. The Docker image has not been rebuilt since
+  2024-08-07 and is therefore nine patch releases behind the npm distribution.
+  Nothing here has shipped in over a year.
+packages:
+  - name: '@useoptic/optic'
+    registry: npm
+    url: https://www.npmjs.com/package/@useoptic/optic
+    metadata_url: https://registry.npmjs.org/@useoptic%2Foptic
+    official: true
+    kind: cli
+    language: javascript
+    license: MIT
+    install: npm install -g @useoptic/optic
+    version: 1.0.9
+    published: '2025-08-10'
+    first_published: '2022-07-18'
+    note: >-
+      The Optic CLI binary (bin -> build/index.js). This is the primary
+      distribution of the product.
+  - name: '@useoptic/openapi-io'
+    registry: npm
+    url: https://www.npmjs.com/package/@useoptic/openapi-io
+    metadata_url: https://registry.npmjs.org/@useoptic%2Fopenapi-io
+    official: true
+    kind: library
+    language: javascript
+    license: MIT
+    install: npm install @useoptic/openapi-io
+    version: 1.0.9
+    published: '2025-08-10'
+    first_published: '2021-11-17'
+    note: >-
+      Reading, writing, bundling and dereferencing OpenAPI documents, including
+      $ref resolution across multi-file specs.
+  - name: '@useoptic/openapi-utilities'
+    registry: npm
+    url: https://www.npmjs.com/package/@useoptic/openapi-utilities
+    metadata_url: https://registry.npmjs.org/@useoptic%2Fopenapi-utilities
+    official: true
+    kind: library
+    language: javascript
+    license: MIT
+    install: npm install @useoptic/openapi-utilities
+    version: 1.0.9
+    published: '2025-08-10'
+    first_published: '2021-11-03'
+    note: OpenAPI traversal, fact extraction and change-classification helpers.
+  - name: '@useoptic/json-pointer-helpers'
+    registry: npm
+    url: https://www.npmjs.com/package/@useoptic/json-pointer-helpers
+    metadata_url: https://registry.npmjs.org/@useoptic%2Fjson-pointer-helpers
+    official: true
+    kind: library
+    language: javascript
+    license: MIT
+    install: npm install @useoptic/json-pointer-helpers
+    version: 1.0.9
+    published: '2025-08-10'
+    first_published: '2021-11-17'
+    note: RFC 6901 JSON Pointer utilities used to address nodes inside a spec.
+  - name: '@useoptic/rulesets-base'
+    registry: npm
+    url: https://www.npmjs.com/package/@useoptic/rulesets-base
+    metadata_url: https://registry.npmjs.org/@useoptic%2Frulesets-base
+    official: true
+    kind: library
+    language: javascript
+    license: MIT
+    install: npm install @useoptic/rulesets-base
+    version: 1.0.9
+    published: '2025-08-10'
+    first_published: '2022-03-11'
+    note: >-
+      The authoring surface for custom Optic rulesets — the base classes a team
+      extends to write its own API style guide.
+  - name: '@useoptic/standard-rulesets'
+    registry: npm
+    url: https://www.npmjs.com/package/@useoptic/standard-rulesets
+    metadata_url: https://registry.npmjs.org/@useoptic%2Fstandard-rulesets
+    official: true
+    kind: library
+    language: javascript
+    license: MIT
+    install: npm install @useoptic/standard-rulesets
+    version: 1.0.9
+    published: '2025-08-10'
+    first_published: '2022-05-05'
+    note: >-
+      The built-in rulesets shipped with Optic: breaking-changes, documentation,
+      examples, naming-changes, spectral and lintgpt.
+  - name: useoptic/optic
+    registry: dockerhub
+    url: https://hub.docker.com/r/useoptic/optic
+    metadata_url: https://hub.docker.com/v2/repositories/useoptic/optic/
+    official: true
+    kind: container
+    license: MIT
+    install: docker pull docker.io/useoptic/optic:latest
+    version: v1.0.0
+    published: '2024-08-07'
+    note: >-
+      Container distribution of the CLI. Tags latest, v1.0 and v1.0.0 were all
+      pushed 2024-08-07 and have not been rebuilt since, so the image is nine
+      patch releases behind the npm distribution (1.0.9). 107,741 pulls recorded
+      at probe time.
+  - name: opticdev/action
+    registry: github-marketplace
+    url: https://github.com/marketplace/actions/optic-ci
+    metadata_url: https://api.github.com/repos/opticdev/action
+    official: true
+    kind: ci-action
+    license: MIT
+    install: 'uses: opticdev/action@v1'
+    version: v1.0.8
+    published: '2023-06-08'
+    note: >-
+      First-party GitHub Action wrapping the Optic CLI for pull-request checks.
+      Repository is NOT archived (last push 2025-04-30) but the last tagged
+      release is v1.0.8 from 2023-06-08.
+registries_checked:
+  - registry: npm
+    result: 6 first-party packages found under the @useoptic scope
+  - registry: dockerhub
+    result: 1 official image (useoptic/optic)
+  - registry: github-marketplace
+    result: 1 official action (opticdev/action)
+  - registry: pypi
+    result: none — Optic ships no Python distribution
+  - registry: rubygems
+    result: none
+  - registry: crates.io
+    result: none
+  - registry: maven-central
+    result: none
+  - registry: nuget
+    result: none
+  - registry: pkg.go.dev
+    result: none
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
