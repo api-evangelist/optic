@@ -47,7 +47,7 @@ tags:
   - OpenAPI
   - Testing
   - CLI
-  - Open-Source
+  - Open Source
   - Archived
 tags_raw:
   - API Governance
@@ -60,6 +60,7 @@ tags_raw:
   - CLI
   - Open Source
   - Archived
+  - Open-Source
 url: >-
   https://raw.githubusercontent.com/api-evangelist/optic/refs/heads/main/apis.yml
 created: '2026-03-25'
