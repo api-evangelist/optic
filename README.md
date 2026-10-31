@@ -1,4 +1,4 @@
-# Optic (optic)
+# Optic
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,53 +64,106 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Optic is an open source tool for OpenAPI linting, diffing, and testing that helps prevent breaking changes, publish accurate documentation, and improve API design through behavior-aware specification comparison and forwards-only governance.
+Optic is an MIT-licensed command-line tool for OpenAPI linting, diffing and testing. It compares two versions of an OpenAPI document with behaviour-aware diffing to catch breaking changes before they ship, enforces style-guide rulesets (breaking-changes, documentation, examples, naming-changes, Spectral and lintgpt), and generates or verifies OpenAPI from captured test traffic via HAR files, Postman collections or a local proxy. Optic Labs was acquired by Atlassian in April 2024; the hosted Optic Cloud service was disconnected from the CLI at v1.0.0 in August 2024, the documentation site was retired in favour of the GitHub Wiki, and the source repository was archived read-only in January 2026 after a final v1.0.9 release. Optic publishes no callable API of its own — it is a tool that consumes and governs other people's contracts.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/optic/refs/heads/main/apis.yml)
+**Areas:** API Governance · Breaking Changes · Contract Testing · Diff · Linting · OpenAPI · Testing · CLI · Open Source · Archived
 
-## Scope
+## Optic on APIs.io
 
-- **Type:** Index
+Everything profiled for Optic is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/optic/](https://apis.io/providers/optic/)** — or go straight to one of the APIs or properties below.
 
-## Tags:
+### APIs (1)
 
- - API Governance, Breaking Changes, Contract Testing, Diff, Linting, OpenAPI, Testing
+- [Optic CLI](https://apis.io/apis/optic/optic-cli/) — The Optic CLI provides OpenAPI diffing, linting and breaking-change detection from the command line, comparing two versions of an OpenAPI specification with…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-25
-- **Modified:** 2026-03-26
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Security (2)
 
-### Optic CLI
-The Optic CLI provides OpenAPI diffing, linting, and breaking change detection from the command line, comparing two versions of an OpenAPI specification using behavior-aware diffing and applying style guide rules with forwards-only governance.
+Authentication, trust centre, and vulnerability disclosure.
 
-**Human URL:** [https://www.useoptic.com/docs](https://www.useoptic.com/docs)
+- [Optic Domain Security](https://apis.io/security/optic/optic-domain-security/)
+- [Optic Vulnerability Disclosure](https://apis.io/security/optic/optic-vulnerability-disclosure/)
 
-#### Tags:
+#### Plans and pricing (1)
 
- - Breaking Changes, CLI, Diff, Linting, OpenAPI
+Published plans, tiers and prices.
 
-#### Properties
+- [Optic Plans Pricing](https://apis.io/plans/optic/optic-plans-pricing/)
 
-- [Documentation](https://www.useoptic.com/docs)
-- [Getting Started](https://www.useoptic.com/docs)
-- [OpenAPI Diff](https://www.useoptic.com/docs/diff-openapi)
-- [Breaking Changes](https://www.useoptic.com/docs/detect-breaking-changes)
-- [Linting](https://www.useoptic.com/docs/lint-openapi)
-- [Changelog](https://www.useoptic.com/docs/openapi-changelog)
-- [API Verification](https://www.useoptic.com/docs/verify-openapi)
+#### Rate limits (1)
 
-## Common Properties
+Published request limits.
 
-- [Website](https://www.useoptic.com)
-- [Documentation](https://www.useoptic.com/docs)
-- [Core Concepts](https://www.useoptic.com/docs/core-concepts)
-- [GitHub Repository](https://github.com/opticdev/optic)
+- [Optic Rate Limits](https://apis.io/rate-limits/optic/optic-rate-limits/)
 
-## Maintainers
+#### FinOps (1)
 
-**FN:** Kin Lane
+What the API costs to run, by operation.
 
-**Email:** kin@apievangelist.com
+- [Optic Finops](https://apis.io/finops/optic/optic-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://github.com/opticdev/optic)
+- [Documentation](https://github.com/opticdev/optic/wiki)
+- [Getting started](https://github.com/opticdev/optic/wiki)
+- [Support](https://github.com/opticdev/optic/discussions)
+- [GitHub](https://github.com/opticdev)
+
+## API Evangelist rating
+
+**Kin Score 19.7** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 0.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 40.5 |
+| Access clarity | 0.0 |
+
+**Agent readiness 2.5** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/optic/](https://apis.io/providers/optic/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Optic: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/optic/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
